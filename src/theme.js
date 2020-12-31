@@ -1,12 +1,11 @@
 import { createMuiTheme, responsiveFontSizes } from "@material-ui/core";
 import { enGB } from '@material-ui/core/locale';
 
-// colors
-const primary = "#922c88";
-const secondary = "#922c88";
-const black = "#343a40";
+
+const black = "#212121";
 const darkBlack = "rgb(36, 40, 44)";
-const background = "#f5f5f5";
+const background = "#FFFFFF";
+
 const warningLight = "rgba(253, 200, 69, .3)";
 const warningMain = "rgba(253, 200, 69, .5)";
 const warningDark = "rgba(253, 200, 69, .7)";
@@ -29,8 +28,12 @@ const theme = createMuiTheme({
 
   palette: {
 
-    primary: { main: primary },
-    secondary: { main: secondary },
+    primary: { main: "#03A9F4",
+               dark: "#0288D1",
+               light: "#B3E5FC"
+
+      },
+    secondary: { main: "#FF5722" },
     common: {
       black,
       darkBlack
@@ -122,11 +125,7 @@ const theme = createMuiTheme({
       }
     }
   },
-  typography: {
-    fontFamily: [
-      'IRANSans'
-    ].join(','),
-  }
+ 
 }, enGB);
 
 export default responsiveFontSizes(theme);

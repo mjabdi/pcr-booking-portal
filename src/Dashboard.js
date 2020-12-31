@@ -28,7 +28,7 @@ import {getMenuContent, getMenuIndex} from './MenuList';
 import { useLocation, useHistory} from "react-router-dom";
 import Copyright from './CopyRight'
 
-const drawerWidth = 120;
+const drawerWidth = 150;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -152,8 +152,8 @@ export default function Dashboard() {
 
   const handleLogout = () =>
   {
-    localStorage.removeItem('pcr-auth-token');
-    sessionStorage.removeItem('pcr-auth-token');
+    localStorage.removeItem('app-auth-token');
+    sessionStorage.removeItem('app-auth-token');
     setState(state => ({...state, signedIn: false}));
     history.replace('./login');
   }

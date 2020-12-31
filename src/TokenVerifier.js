@@ -1,5 +1,21 @@
+import UserService from "./services/UserService";
 
-export async function getShopIdFromToken(token)
+export async function getUserIdFromToken(token)
 {
-    return '1583276230';
+    try{
+       const res  = await UserService.checkToken({token: token})
+       if (res.data.status === 'OK')
+        {
+            return res.data.userId
+        }
+       else
+        {
+            return null
+        }
+    }
+    catch(err)
+    {
+        return null
+    }
+  
 }
