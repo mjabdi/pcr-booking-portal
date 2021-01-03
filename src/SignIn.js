@@ -31,6 +31,7 @@ import Copyright from "./CopyRight";
 
 import { useHistory } from "react-router-dom";
 import UserService from "./services/UserService";
+import { getMenuId } from "./MenuList";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -121,7 +122,7 @@ export default function SignIn() {
           }
 
           setState((state) => ({ ...state, signedIn: true }))
-          history.push("/dashboard")
+          history.push(`/${getMenuId(0)}`)
         }
         else if (res.data.status === 'FAILED')
         {

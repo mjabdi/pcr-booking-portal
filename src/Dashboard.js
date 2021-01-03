@@ -20,7 +20,7 @@ import {BrowserView, MobileView, isMobile} from 'react-device-detect';
 
 
 
-import { Tooltip } from '@material-ui/core';
+import { Grid, Tooltip } from '@material-ui/core';
 import GlobalState from './GlobalState';
 import Menu from './Menu';
 import {getMenuContent, getMenuIndex} from './MenuList';
@@ -178,17 +178,25 @@ export default function Dashboard() {
             <MenuIcon />
           </IconButton>
 
-          <Tooltip title="Logout">
-            <IconButton
-              edge="end"
-              color="inherit"
-              aria-label="logout"
-              onClick={handleLogout}
-              className={clsx(classes.menuButton)}
-            >
-              <ExitToAppOutlined />
-            </IconButton>
-          </Tooltip>
+          <Grid container direction="row" justify="flex-end" alignItems="center">
+            <Grid item>
+              {state.userId &&
+                `${state.userId.forename} ${state.userId.surname}`}
+            </Grid>
+            <Grid item>
+              <Tooltip title="Logout">
+                <IconButton
+                  edge="end"
+                  color="inherit"
+                  aria-label="logout"
+                  onClick={handleLogout}
+                  className={clsx(classes.menuButton)}
+                >
+                  <ExitToAppOutlined />
+                </IconButton>
+              </Tooltip>
+            </Grid>
+          </Grid>
         </Toolbar>
       </AppBar>
 
@@ -209,25 +217,19 @@ export default function Dashboard() {
         <Menu />
       </Drawer>
 
-   
-
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        <Container maxWidth={isMobile ? 'xs' : 'xl'} className={classes.container}>
+        <Container
+          maxWidth={isMobile ? "xs" : "xl"}
+          className={classes.container}
+        >
+          {getMenuContent(currentMenuIndex)}
 
-             {getMenuContent(currentMenuIndex)}
-        
           <Box pt={4}>
             <Copyright />
-         </Box>   
-        
+          </Box>
         </Container>
-
-      
       </main>
-
-     
-
     </div>
   );
 }

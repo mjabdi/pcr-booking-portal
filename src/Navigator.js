@@ -16,6 +16,9 @@ import Dashboard from './Dashboard';
 import { useLocation, useHistory} from "react-router-dom";
 import { getUserIdFromToken } from './TokenVerifier';
 import ForgotPassword from './ForgotPassword';
+import UserBookingService from './services/UserBookingService';
+import UserService from './services/UserService';
+import { getMenuId } from './MenuList';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -63,6 +66,8 @@ export default function Navigator() {
       const checkToken = async () =>
       {
         const authToken = localStorage.getItem('app-auth-token') || sessionStorage.getItem('app-auth-token');
+        UserBookingService.setToken(authToken)
+        UserService.setToken(authToken)
 
         if (location.pathname.startsWith('/signup'))
         {
@@ -91,7 +96,7 @@ export default function Navigator() {
            else if (location.pathname === '/' || location.pathname === '/#' || location.pathname.startsWith('/login'))
            {
              setState(state => ({...state, signedIn: true, signedUp: false, forgotPassword: false}));
-             history.replace('/dashboard');
+             history.replace(`/${getMenuId(0)}`);
            }
            else
            {

@@ -2,6 +2,11 @@ import API from './api';
 
 export default class UserService{
 
+    static setToken = (token) =>
+    {
+        this.token = token
+    }
+
     static signUp = (payload) =>
     {
         return API.post('/api/user/signup', payload)
@@ -25,6 +30,11 @@ export default class UserService{
     static resetPassword = (payload) =>
     {
         return  API.post('/api/user/resetpassword', payload)
+    }
+
+    static changePassword = (payload) =>
+    {
+        return  API.post('/api/user/changepassword', {token: this.token, ...payload})
     }
 
     static checkToken = (payload) =>
