@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 
-import { FormControl, InputLabel, LinearProgress, MenuItem, Select, Tooltip } from "@material-ui/core";
+import { FormControl, FormControlLabel, InputLabel, LinearProgress, MenuItem, Select, Switch, Tooltip } from "@material-ui/core";
 import GlobalState from "./GlobalState";
 
 import UserBookingService from './services/UserBookingService'
@@ -34,7 +34,13 @@ export default function BookingsPreview() {
   const [loading, setLoading] = React.useState(false)
 
   const [allPCRBookings, setAllPCRBookings] = React.useState([]);
-  const[testType, setTestType] = React.useState('all')
+  const [testType, setTestType] = React.useState('all')
+
+  const [hideCanceled, setHideCanceled] = React.useState(true)
+  const hideCanceledChanged = (event) =>
+  {
+    setHideCanceled(event.target.checked)
+  }
 
   const testTypeChanged = (event) =>
   {
@@ -94,15 +100,15 @@ export default function BookingsPreview() {
   {
     if (testType === 'all')
     {
-      return tests
+      return tests.filter(test => hideCanceled ? !test.deleted : true)
     }
     else if (testType === 'pcrfittofly')
     {
-      return tests.filter(test => !test.tr)
+      return tests.filter(test => !test.tr && (hideCanceled ? !test.deleted : true))
     }
     else if (testType === 'pcrtesttorelease')
     {
-      return tests.filter(test => test.tr)
+      return tests.filter(test => test.tr && (hideCanceled ? !test.deleted : true))
     }
   }
 
@@ -115,7 +121,7 @@ export default function BookingsPreview() {
       )}
 
       {!loading && (
-        <Grid container justify="center" alignContent="center">
+        <Grid container justify="space-between" alignContent="center" spacing={2}>
           <Grid item>
             <FormControl className={classes.formControl}>
               <Select
@@ -125,13 +131,27 @@ export default function BookingsPreview() {
                 value={testType}
                 onChange={testTypeChanged}
               >
-                <MenuItem value={"all"}>All Tests</MenuItem>
+                <MenuItem value={"all"}>Show All Tests</MenuItem>
                 <MenuItem value={"pcrfittofly"}>PCR Fit to Fly Test</MenuItem>
                 <MenuItem value={"pcrtesttorelease"}>
                   PCR Test to Release
                 </MenuItem>
               </Select>
             </FormControl>
+          </Grid>
+          <Grid item>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={hideCanceled}
+                  onChange={hideCanceledChanged}
+                  color="secondary"
+                  name="hide-canceled"
+                  inputProps={{ "aria-label": "secondary checkbox" }}
+                />
+              }
+              label="Hide Canceled Records"
+            />
           </Grid>
         </Grid>
       )}
@@ -143,7 +163,18 @@ export default function BookingsPreview() {
             !loading && (
               <Grid container justify="center" alignContent="center">
                 <Grid item>
-                  <div style={{marginTop:"100px", fontSize:"1.2rem", color: "#aaa", padding:"20px", border: "1px solid #ddd"}}> No Tests Found </div>
+                  <div
+                    style={{
+                      marginTop: "100px",
+                      fontSize: "1.2rem",
+                      color: "#aaa",
+                      padding: "20px",
+                      border: "1px solid #ddd",
+                    }}
+                  >
+                    {" "}
+                    No Tests Found{" "}
+                  </div>
                 </Grid>
               </Grid>
             )}

@@ -166,7 +166,7 @@ export default function NewBooking() {
                 <Card className={classes.root}>
                   <CardHeader
                     avatar={
-                      <Avatar aria-label="recipe" className={classes.avatar}>
+                      <Avatar aria-label="pcr-fit-to-fly" className={classes.avatar}>
                         <AirplanemodeActiveIcon />
                       </Avatar>
                     }
@@ -261,7 +261,7 @@ export default function NewBooking() {
                 <Card className={classes.root}>
                   <CardHeader
                     avatar={
-                      <Avatar aria-label="recipe" className={classes.avatar}>
+                      <Avatar aria-label="pcr-test-to-release" className={classes.avatar}>
                         <AccessibilityNewIcon />
                       </Avatar>
                     }

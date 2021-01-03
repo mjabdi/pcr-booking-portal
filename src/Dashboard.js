@@ -107,6 +107,23 @@ const useStyles = makeStyles((theme) => ({
   fixedHeight: {
     height: 240,
   },
+
+  appbarTitle:{
+    color: theme.palette.primary.main,
+    fontSize: "1.5rem",
+    fontWeight: "500",
+    textShadow: "2px 2px #ddd"
+  
+  },
+
+  appbarCenter:{
+    position: "fixed",
+    width: "400px",
+    top : "17px",
+    left: "50%",
+    marginLeft: "-200px"
+  }
+
 }));
 
 export default function Dashboard() {
@@ -177,6 +194,15 @@ export default function Dashboard() {
           >
             <MenuIcon />
           </IconButton>
+
+          {!isMobile && (
+              <div className={classes.appbarCenter}>
+                  <span className={classes.appbarTitle}>Booking Doctor Portal</span> 
+              </div>
+          )}
+
+           
+          
 
           <Grid container direction="row" justify="flex-end" alignItems="center">
             <Grid item>

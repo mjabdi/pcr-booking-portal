@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 
-import { Button, Icon, IconButton, Tooltip } from "@material-ui/core";
+import { Avatar, Button, Divider, Icon, IconButton, Tooltip } from "@material-ui/core";
 import GlobalState from "./GlobalState";
 import { fontSize, fontWeight } from "@material-ui/system";
 import AccessibilityNewIcon from "@material-ui/icons/AccessibilityNew";
@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
   fixedHeight: {
     minHeight: 240,
+    height: "100%"
   },
 
   title: {
@@ -110,7 +111,16 @@ const useStyles = makeStyles((theme) => ({
 
   editIcon: {
     color: theme.palette.secondary.main
-  }
+  },
+
+  avatar: {
+    backgroundColor: theme.palette.primary.main,
+    marginRight: "10px"
+  },
+
+  divider:{
+    // backgroundColor: theme.palette.primary.main,
+  },
 
 }));
 
@@ -180,8 +190,11 @@ export default function PCRBookingCard({ booking }) {
     } else if (booking.status === "report_sent") {
       return (
         <React.Fragment>
-          <span className={classes.itemLabel}> Status : </span>{" "}
+         
           <Grid container alignItems="center" spacing={1}>
+            <Grid item>
+               <span className={classes.itemLabel}> Status : </span>
+            </Grid>
             <Grid item>
               <span className={classes.reportSentStatus}>Report Sent</span>
             </Grid>
@@ -195,8 +208,11 @@ export default function PCRBookingCard({ booking }) {
     else if (booking.status === "report_cert_sent") {
       return (
         <React.Fragment>
-             <span className={classes.itemLabel}> Status : </span>{" "}
+            
           <Grid container alignItems="center" spacing={1}>
+            <Grid item>
+              <span className={classes.itemLabel}> Status : </span>
+            </Grid>
             <Grid item>
               <span className={classes.reportSentStatus}>{`Report & Certificate Sent`}</span>
             </Grid>
@@ -484,7 +500,6 @@ export default function PCRBookingCard({ booking }) {
   return (
     <React.Fragment>
       <Paper className={fixedHeightPaper}>
-        
         {booking.status === "booked" && !booking.deleted && (
           <div className={classes.editButton}>
             <Tooltip title="Modify or Cancel...">
@@ -505,10 +520,12 @@ export default function PCRBookingCard({ booking }) {
                 alignItems="center"
               >
                 <Grid item>
-                  <AccessibilityNewIcon
-                    className={classes.AirIcon}
-                    color="primary"
-                  />
+                  <Avatar
+                    aria-label="pcr-fit-to-fly"
+                    className={classes.avatar}
+                  >
+                    <AccessibilityNewIcon />
+                  </Avatar>
                 </Grid>
                 <Grid item>PCR Test to Release</Grid>
               </Grid>
@@ -531,6 +548,10 @@ export default function PCRBookingCard({ booking }) {
                 <Grid item xs={12} md={6}>
                   {getBookingDate()}
                 </Grid>
+                <Grid item xs={12}>
+                  <Divider className={classes.divider} />
+                </Grid>
+
                 <Grid item xs={12} md={6}>
                   {getGender()}
                 </Grid>
@@ -643,10 +664,12 @@ export default function PCRBookingCard({ booking }) {
                 alignItems="center"
               >
                 <Grid item>
-                  <AirplanemodeActiveIcon
-                    className={classes.AirIcon}
-                    color="primary"
-                  />
+                  <Avatar
+                    aria-label="pcr-fit-to-fly"
+                    className={classes.avatar}
+                  >
+                    <AirplanemodeActiveIcon />
+                  </Avatar>
                 </Grid>
                 <Grid item>PCR Fit to Fly Test</Grid>
               </Grid>
@@ -665,6 +688,9 @@ export default function PCRBookingCard({ booking }) {
                 </Grid>
                 <Grid item xs={12} md={6}>
                   {getBookingDate()}
+                </Grid>
+                <Grid item xs={12}>
+                  <Divider className={classes.divider} />
                 </Grid>
                 <Grid item xs={12} md={6}>
                   {getGender()}
