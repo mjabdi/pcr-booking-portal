@@ -4,11 +4,21 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 
-import { FormControl, FormControlLabel, InputLabel, LinearProgress, MenuItem, Select, Switch, Tooltip } from "@material-ui/core";
+import {
+  FormControl,
+  FormControlLabel,
+  InputLabel,
+  LinearProgress,
+  MenuItem,
+  Select,
+  Switch,
+  Tooltip,
+} from "@material-ui/core";
 import GlobalState from "./GlobalState";
 
-import UserBookingService from './services/UserBookingService'
+import UserBookingService from "./services/UserBookingService";
 import PCRBookingCard from "./PCRBookingCard";
+import GynaeBookingCard from "./GynaeBookingCard";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -21,96 +31,86 @@ const useStyles = makeStyles((theme) => ({
     height: 240,
   },
 
-  formControl:{
-    marginBottom:"20px",
-    minWidth:"200px"
-  }
+  formControl: {
+    marginBottom: "20px",
+    minWidth: "200px",
+  },
 }));
 
 export default function BookingsPreview() {
   const classes = useStyles();
   const [state, setState] = React.useContext(GlobalState);
 
-  const [loading, setLoading] = React.useState(false)
+  const [loading, setLoading] = React.useState(false);
 
-  const [allPCRBookings, setAllPCRBookings] = React.useState([]);
-  const [testType, setTestType] = React.useState('all')
+  const [allUserBookings, setAllUserBookings] = React.useState([]);
+  const [testType, setTestType] = React.useState("all");
 
-  const [hideCanceled, setHideCanceled] = React.useState(true)
-  const hideCanceledChanged = (event) =>
-  {
-    setHideCanceled(event.target.checked)
-  }
+  const [hideCanceled, setHideCanceled] = React.useState(true);
+  const hideCanceledChanged = (event) => {
+    setHideCanceled(event.target.checked);
+  };
 
-  const testTypeChanged = (event) =>
-  {
-    setTestType(event.target.value)
-  }
+  const testTypeChanged = (event) => {
+    setTestType(event.target.value);
+  };
 
-  useEffect( () => {
-    const loadData = async () =>
-    {
-      try{
-        setLoading(true)
-        const res = await UserBookingService.getAllPCRUserBookings()
-        setLoading(false)
-        if (res.data.status === 'OK')
-        {
-          setAllPCRBookings(res.data.bookings)
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        setLoading(true);
+        const res = await UserBookingService.getAllUserBookings();
+
+        setLoading(false);
+        if (res.data.status === "OK") {
+          setAllUserBookings(res.data.bookings);
         }
-      }catch(err)
-      {
-        setLoading(false)
-        console.error(err)
+      } catch (err) {
+        setLoading(false);
+        console.error(err);
       }
+    };
 
-    }
-
-    const loadDataWithoutRefresh = async () =>
-    {
-      try{
-        const res = await UserBookingService.getAllPCRUserBookings()
-        if (res.data.status === 'OK')
-        {
-          setAllPCRBookings(res.data.bookings)
+    const loadDataWithoutRefresh = async () => {
+      try {
+        const res = await UserBookingService.getAllUserBookings();
+        if (res.data.status === "OK") {
+          setAllUserBookings(res.data.bookings);
         }
-      }catch(err)
-      {
-        console.error(err)
+      } catch (err) {
+        console.error(err);
       }
+    };
 
+    if (state.userId.email) loadData();
+
+    const timer = setInterval(() => {
+      if (state.userId.email) loadDataWithoutRefresh();
+    }, 10000);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, [state.userId.email]);
+
+  const filterTests = (tests) => {
+    if (testType === "all") {
+      return tests.filter((test) => (hideCanceled ? !test.deleted : true));
+    } else if (testType === "pcrfittofly") {
+      return tests.filter(
+        (test) => test.clinic === "pcr" && !test.tr && (hideCanceled ? !test.deleted : true)
+      );
+    } else if (testType === "pcrtesttorelease") {
+      return tests.filter(
+        (test) => test.clinic === "pcr" && test.tr && (hideCanceled ? !test.deleted : true)
+      );
     }
-
-    if (state.userId.email)
-      loadData()
-
-
-      const timer = setInterval(() => {
-        if (state.userId.email)
-            loadDataWithoutRefresh() 
-      }, 10000);
-
-      return () => {
-        clearInterval(timer)
-      }
-
-  }, [state.userId.email])
-
-  const filterTests = (tests) =>
-  {
-    if (testType === 'all')
-    {
-      return tests.filter(test => hideCanceled ? !test.deleted : true)
+    else if (testType === "gynae") {
+      return tests.filter(
+        (test) => test.clinic === "gynae"  && (hideCanceled ? !test.deleted : true)
+      );
     }
-    else if (testType === 'pcrfittofly')
-    {
-      return tests.filter(test => !test.tr && (hideCanceled ? !test.deleted : true))
-    }
-    else if (testType === 'pcrtesttorelease')
-    {
-      return tests.filter(test => test.tr && (hideCanceled ? !test.deleted : true))
-    }
-  }
+  };
 
   return (
     <React.Fragment>
@@ -121,7 +121,12 @@ export default function BookingsPreview() {
       )}
 
       {!loading && (
-        <Grid container justify="space-between" alignContent="center" spacing={2}>
+        <Grid
+          container
+          justify="space-between"
+          alignContent="center"
+          spacing={2}
+        >
           <Grid item>
             <FormControl className={classes.formControl}>
               <Select
@@ -131,10 +136,13 @@ export default function BookingsPreview() {
                 value={testType}
                 onChange={testTypeChanged}
               >
-                <MenuItem value={"all"}>Show All Tests</MenuItem>
+                <MenuItem value={"all"}>Show All Appointments</MenuItem>
                 <MenuItem value={"pcrfittofly"}>PCR Fit to Fly Test</MenuItem>
                 <MenuItem value={"pcrtesttorelease"}>
                   PCR Test to Release
+                </MenuItem>
+                <MenuItem value={"gynae"}>
+                  Gynaecologist
                 </MenuItem>
               </Select>
             </FormControl>
@@ -158,8 +166,8 @@ export default function BookingsPreview() {
 
       <div style={{ width: "100%", minHeight: "80vh" }}>
         <Grid container spacing={3}>
-          {(!filterTests(allPCRBookings) ||
-            filterTests(allPCRBookings).length === 0) &&
+          {(!filterTests(allUserBookings) ||
+            filterTests(allUserBookings).length === 0) &&
             !loading && (
               <Grid container justify="center" alignContent="center">
                 <Grid item>
@@ -173,17 +181,19 @@ export default function BookingsPreview() {
                     }}
                   >
                     {" "}
-                    No Tests Found{" "}
+                    No Records Found{" "}
                   </div>
                 </Grid>
               </Grid>
             )}
 
-          {filterTests(allPCRBookings) &&
-            filterTests(allPCRBookings).length > 0 &&
-            filterTests(allPCRBookings).map((booking, index) => (
-              <Grid key={`grid-item-${index}`} item xs={12} md={4} lg={6}>
-                <PCRBookingCard booking={booking} />
+          {filterTests(allUserBookings) &&
+            filterTests(allUserBookings).length > 0 &&
+            filterTests(allUserBookings).map((booking, index) => (
+              <Grid key={`grid-item-${index}`} item xs={12} md={4} lg={6}>                
+                {booking.clinic === "pcr" &&  <PCRBookingCard booking={booking} />}
+                {booking.clinic === "gynae" &&  <GynaeBookingCard booking={booking} />}
+
               </Grid>
             ))}
         </Grid>

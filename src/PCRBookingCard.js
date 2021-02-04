@@ -493,7 +493,7 @@ export default function PCRBookingCard({ booking }) {
 
   const editButtonClicked = () =>
   {
-    const href = `https://travelpcrtest.com/user/edit/${booking.bookingRef}-${booking.birthDate}`
+    const href = `https://londonmedicalclinic.co.uk/medicalexpressclinic/user/edit/pcr/${booking._id}`
     window.open(href, "_blank")
   }
 
@@ -502,7 +502,7 @@ export default function PCRBookingCard({ booking }) {
       <Paper className={fixedHeightPaper}>
         {booking.status === "booked" && !booking.deleted && (
           <div className={classes.editButton}>
-            <Tooltip title="Modify or Cancel...">
+            <Tooltip title="Cancel or Modify ...">
               <IconButton onClick={editButtonClicked}>
                 <EditIcon className={classes.editIcon} />
               </IconButton>

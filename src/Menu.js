@@ -16,6 +16,7 @@ import { List, ListItem } from "@material-ui/core";
 import ListItemText from "@material-ui/core/ListItemText";
 import { MenuList , getMenuId } from "./MenuList";
 import { border, borderBottom } from "@material-ui/system";
+import { getGlobalPath } from "./GlobalPath";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -60,7 +61,7 @@ export default function Menu() {
 
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
-    history.push(`/${getMenuId(index)}`);
+    history.push(getGlobalPath(`/${getMenuId(index)}`));
     setState((state) => ({ ...state, currentMenuIndex: index }));
   };
 

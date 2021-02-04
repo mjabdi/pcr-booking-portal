@@ -1,16 +1,15 @@
 
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import DateRangeIcon from '@material-ui/icons/DateRange';
-import AlarmAddIcon from '@material-ui/icons/AlarmAdd';
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import HomeIcon from '@material-ui/icons/Home';
 
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import ColorizeIcon from '@material-ui/icons/Colorize';
+import TodayIcon from '@material-ui/icons/Today';
 
 import BookingsPreview from './BookingsPreview';
 import ChangePassword from './ChangePassword';
 import DashboardPreview from './DashboardPreview';
 
-import ColorizeIcon from '@material-ui/icons/Colorize';
-import TodayIcon from '@material-ui/icons/Today';
+
 import NewBooking from './NewBooking';
 
 
@@ -18,9 +17,10 @@ import NewBooking from './NewBooking';
 
 
 export const MenuList = [
-    {index: 0, id:`booknewtest`, title: `Book a New Test`, icon : <TodayIcon style={{fontSize:"1.9rem"}}/>}, 
-    {index: 1, id:`mytests`, title: `My Tests`, icon : <ColorizeIcon style={{fontSize:"1.9rem"}}/>},
-    {index: 2, id:`changepassword`, title: `Change Password` , icon : <LockOutlinedIcon style={{fontSize:"1.9rem"}}/>},
+    {index: 0, id:`home`, title: `Home`, icon : <HomeIcon style={{fontSize:"1.9rem"}}/>}, 
+    {index: 1, id:`booknewtest`, title: `Book a New Appointment`, icon : <TodayIcon style={{fontSize:"1.9rem"}}/>}, 
+    {index: 2, id:`mytests`, title: `My Appointments`, icon : <ColorizeIcon style={{fontSize:"1.9rem"}}/>},
+    {index: 3, id:`changepassword`, title: `Change Password` , icon : <LockOutlinedIcon style={{fontSize:"1.9rem"}}/>},
 
   ];
 
@@ -28,10 +28,12 @@ export const MenuList = [
   {
       switch (index) {
         case 0:
-          return <NewBooking/>;
+          return <DashboardPreview/>;
         case 1:
-          return <BookingsPreview />;
+          return <NewBooking/>;
         case 2:
+          return <BookingsPreview />;
+        case 3:
           return <ChangePassword/>;
         default:
           return `Page Not Found!`;

@@ -34,6 +34,8 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 
 import AccessibilityNewIcon from "@material-ui/icons/AccessibilityNew";
 import AirplanemodeActiveIcon from "@material-ui/icons/AirplanemodeActive";
+import PregnantWomanIcon from '@material-ui/icons/PregnantWoman';
+import { getGlobalPath } from "./GlobalPath";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -52,6 +54,12 @@ const useStyles = makeStyles((theme) => ({
 
   media: {
     height: 0,
+    paddingTop: "56.25%", // 16:9
+  },
+
+  mediaGynae: {
+    height: 0,
+    backgroundColor: "#fff5fc",
     paddingTop: "56.25%", // 16:9
   },
 
@@ -88,20 +96,26 @@ export default function NewBooking() {
   const classes = useStyles();
   const [state, setState] = React.useContext(GlobalState);
 
-  const [expandedCard1, setExpandedCard1] = React.useState(false);
+  
 
   const [loading, setLoading] = React.useState(false)
   const [bookingId, setBookingId] = React.useState(null)
 
+  const [expandedCard1, setExpandedCard1] = React.useState(false);
   const expandedCard1Clicked = () => {
     setExpandedCard1(!expandedCard1);
   };
 
   const [expandedCard2, setExpandedCard2] = React.useState(false);
-
   const expandedCard2Clicked = () => {
     setExpandedCard2(!expandedCard2);
   };
+
+  const [expandedCard3, setExpandedCard3] = React.useState(false);
+  const expandedCard3Clicked = () => {
+    setExpandedCard3(!expandedCard3);
+  };
+
 
   useEffect( () => {
 
@@ -144,13 +158,24 @@ export default function NewBooking() {
     window.open(href,"_blank")
   }
 
+  const gynaeClicked = () =>
+  {
+    let href =  'https://londonmedicalclinic.co.uk/medicalexpressclinic/book/gynae'
+    // if (bookingId)
+    // {
+    //     href += `/${bookingId}`
+    // }
+
+    window.open(href,"_blank")
+  }
+
   return (
     <React.Fragment>
       <div style={{ minHeight: "80vh", paddingTop: "30px" }}>
         <Grid
           container
           direction="row"
-          justify="center"
+          justify="flex-start"
           alignItems="flex-start"
           spacing={1}
         >
@@ -160,7 +185,7 @@ export default function NewBooking() {
               direction="row"
               justify="center"
               alignItems="flex-start"
-              spacing={10}
+              spacing={2}
             >
               <Grid item>
                 <Card className={classes.root}>
@@ -187,7 +212,7 @@ export default function NewBooking() {
                   />
                   <CardMedia
                     className={classes.media}
-                    image="/images/pcr-fit-fly.webp"
+                    image={getGlobalPath("/images/pcr-fit-fly.webp")}
                     title="Paella dish"
                   />
                   <CardContent>
@@ -195,7 +220,7 @@ export default function NewBooking() {
                       variant="body2"
                       color="textSecondary"
                       component="p"
-                      style={{ textAlign: "justify" }}
+                      style={{ textAlign: "justify",  minHeight:200 }}
                     >
                       In order to protect public health and prevent the spread
                       of COVID-19, many airlines will ask passengers to produce
@@ -282,7 +307,7 @@ export default function NewBooking() {
                   />
                   <CardMedia
                     className={classes.media}
-                    image="/images/pcr-test-release.jpg"
+                    image={getGlobalPath("/images/pcr-test-release.jpg")}
                     title="Paella dish"
                   />
                   <CardContent>
@@ -290,7 +315,7 @@ export default function NewBooking() {
                       variant="body2"
                       color="textSecondary"
                       component="p"
-                      style={{ textAlign: "justify" }}
+                      style={{ textAlign: "justify" , minHeight:200}}
                     >
                       The UK Coronavirus Task Force has announced that rules for
                       the current 14 day quarantine for people returning to the
@@ -362,6 +387,83 @@ export default function NewBooking() {
                   </Collapse>
                 </Card>
               </Grid>
+
+              <Grid item>
+                <Card className={classes.root}>
+                  <CardHeader
+                    avatar={
+                      <Avatar aria-label="gynae-test" className={classes.avatar}>
+                        <PregnantWomanIcon />
+                      </Avatar>
+                    }
+                    // action={
+                    //   <IconButton aria-label="settings">
+                    //     <MoreVertIcon />
+                    //   </IconButton>
+                    // }
+                    title={
+                      <span className={classes.title}>
+                        {" "}
+                        Private Gynaecologist London{" "}
+                      </span>
+                    }
+                    subheader={
+                      <span className={classes.subheader}> £100 <span style={{color:"#999", fontWeight:"400", marginLeft:"10px", fontSize:"0.8rem"}}> pre-payment </span> </span>
+                    }
+                  />
+                  <CardMedia
+                    className={classes.mediaGynae}
+                    image={getGlobalPath("/images/banner-lady.png")}
+                    title="Paella dish"
+                  />
+                  <CardContent>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                      style={{ textAlign: "justify", minHeight:200 }}
+                    >
+                     Years of experience has made us understand that women need expert gynaecology advice and skills, plus specialist care is needed for different cases.
+                     Our highly experienced consultant gynaecologist in London works with a team of specialists, including doctors and GPs in areas like mental health, fertility, cardiology, ultrasound scans, and endocrinology.
+                    </Typography>
+                  </CardContent>
+                  <CardActions disableSpacing>
+                    <Button
+                      color="secondary"
+                      variant="contained"
+                      style={{ color: "#fff" }}
+                      onClick={gynaeClicked}
+                    >
+                      Book Now
+                    </Button>
+                    <IconButton
+                      className={clsx(classes.expand, {
+                        [classes.expandOpen]: expandedCard3,
+                      })}
+                      onClick={expandedCard3Clicked}
+                      aria-expanded={expandedCard3}
+                      aria-label="show more"
+                    >
+                      <ExpandMoreIcon />
+                    </IconButton>
+                  </CardActions>
+                  <Collapse in={expandedCard3} timeout="auto" unmountOnExit>
+                    <CardContent>
+                      <Typography paragraph>Method:</Typography>
+                      <Typography paragraph style={{ textAlign: "justify" }}>
+                      An essential aspect of general women's healthcare is gynaecology. We are an established private gynaecology clinic, situated at, 117A Harley Street, Marylebone, London providing everyday services to women. Headed by a team of consultants, we operate with a wealth of knowledge and expertise.
+                      </Typography>
+                      <Typography paragraph style={{ textAlign: "justify" }}>
+                      Our experience private gynaecologists treat female health issues ranging from pelvic pain, early pregnancy, vulval disorders, endometriosis, painful sex, contraception, fertility, to general gynaecological condition. Teenagers having relevant concerns can also get help at our practice.
+                      </Typography>
+                      <Typography paragraph style={{ textAlign: "justify" }}>
+                      Should an in-patient stay or surgical procedure be necessary, we've got admitting rights at top private London hospitals near you where this can be done. We pride in our ability to provide expert care and advice and be available to patients when there is any need.
+                      </Typography>
+                    </CardContent>
+                  </Collapse>
+                </Card>
+              </Grid>
+
             </Grid>
           </Grid>
         </Grid>

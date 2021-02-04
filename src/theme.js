@@ -4,7 +4,7 @@ import { enGB } from '@material-ui/core/locale';
 
 const black = "#212121";
 const darkBlack = "rgb(36, 40, 44)";
-const background = "#f1f1f1";
+const background = "#f9f9f9";
 
 const warningLight = "rgba(253, 200, 69, .3)";
 const warningMain = "rgba(253, 200, 69, .5)";

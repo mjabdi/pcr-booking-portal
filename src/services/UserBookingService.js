@@ -12,6 +12,11 @@ export default class UserBookingService{
         return API.post('/api/userbookings/getallpcrbookings', {token: this.token})
     }
 
+    static getAllUserBookings = () =>
+    {
+        return API.post('/api/userbookings/getalluserbookings', {token: this.token})
+    }
+
     static getMostRecentBookingId = () =>
     {
         return API.post('/api/userbookings/getmostrecentbookingid', {token: this.token})

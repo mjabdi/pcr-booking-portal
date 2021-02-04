@@ -19,6 +19,7 @@ import ForgotPassword from './ForgotPassword';
 import UserBookingService from './services/UserBookingService';
 import UserService from './services/UserService';
 import { getMenuId } from './MenuList';
+import { getGlobalPath } from './GlobalPath';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -69,12 +70,12 @@ export default function Navigator() {
         UserBookingService.setToken(authToken)
         UserService.setToken(authToken)
 
-        if (location.pathname.startsWith('/signup'))
+        if (location.pathname.startsWith(getGlobalPath('/signup')))
         {
           setState(state => ({...state, signedIn: false, signedUp: true, forgotPassword: false}));
           setLoaded(true)
 
-        }else if (location.pathname.startsWith('/forgotpassword'))
+        }else if (location.pathname.startsWith(getGlobalPath('/forgotpassword')))
         {
           setState(state => ({...state, signedIn: false, signedUp: false, forgotPassword: true}));
           setLoaded(true)
@@ -83,7 +84,7 @@ export default function Navigator() {
         {
           setState(state => ({...state, signedIn: false, signedUp: false, forgotPassword: false}));
           setLoaded(true)
-          history.replace('/login');
+          history.push(getGlobalPath('/login'));
         }
         else
         {
@@ -91,12 +92,12 @@ export default function Navigator() {
            if (!userId)
            {
               setState(state => ({...state, signedIn: false, signedUp: false, forgotPassword: false}));
-              history.replace('/login');
+              history.push(getGlobalPath('/login'));
            }
-           else if (location.pathname === '/' || location.pathname === '/#' || location.pathname.startsWith('/login'))
+           else if (location.pathname === getGlobalPath('/') || location.pathname === getGlobalPath('/#') || location.pathname.startsWith(getGlobalPath('/login')))
            {
              setState(state => ({...state, signedIn: true, signedUp: false, forgotPassword: false}));
-             history.replace(`/${getMenuId(0)}`);
+             history.push(getGlobalPath(`/${getMenuId(0)}`));
            }
            else
            {

@@ -32,13 +32,14 @@ import Copyright from "./CopyRight";
 import { useHistory } from "react-router-dom";
 import UserService from "./services/UserService";
 import { getMenuId } from "./MenuList";
+import { getGlobalPath } from "./GlobalPath";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
   },
   image: {
-    backgroundImage: "url(/images/bg.jpg)",
+    backgroundImage: `url(${getGlobalPath("/images/bg.jpg")})`,
     backgroundRepeat: "no-repeat",
     backgroundColor:
       theme.palette.type === "light"
@@ -122,7 +123,7 @@ export default function SignIn() {
           }
 
           setState((state) => ({ ...state, signedIn: true }))
-          history.push(`/${getMenuId(0)}`)
+          history.push(getGlobalPath(`/${getMenuId(0)}`))
         }
         else if (res.data.status === 'FAILED')
         {
@@ -248,12 +249,12 @@ export default function SignIn() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="/forgotpassword" variant="body2">
+                <Link href={getGlobalPath("/forgotpassword")} variant="body2">
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/signup" variant="body2">
+                <Link href={getGlobalPath("/signup")} variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

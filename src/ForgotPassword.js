@@ -28,13 +28,14 @@ import Copyright from "./CopyRight";
 
 import { useHistory } from "react-router-dom";
 import UserService from "./services/UserService";
+import { getGlobalPath } from "./GlobalPath";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
   },
   image: {
-    backgroundImage: "url(/images/bg.jpg)",
+    backgroundImage: `url(${getGlobalPath("/images/bg.jpg")})`,
     backgroundRepeat: "no-repeat",
     backgroundColor:
       theme.palette.type === "light"
@@ -92,17 +93,23 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const timeFormat = (num) => {
+
   const min = parseInt(num / 60);
   const seconds = num - min * 60;
+
+  let minStr = `${min}`;
+  if (minStr.length === 1) {
+    minStr = `0${minStr}`;
+  }
+
 
   let secondsStr = `${seconds}`;
   if (secondsStr.length === 1) {
     secondsStr = `0${secondsStr}`;
   }
 
-  return `0${min} : ${secondsStr}`;
+  return `${minStr} : ${secondsStr}`;
 };
-
 export default function ForgotPassword() {
   const classes = useStyles();
 
@@ -192,7 +199,7 @@ export default function ForgotPassword() {
     return !error;
   };
 
-  const MAX_TIME_OUT = 120; //seconds
+  const MAX_TIME_OUT = 10 * 60; //seconds
   const initTimer = () => {
     setTimeLeft(MAX_TIME_OUT);
     const timer = setInterval(() => {
@@ -201,7 +208,7 @@ export default function ForgotPassword() {
 
     setTimeout(() => {
       clearInterval(timer);
-    }, MAX_TIME_OUT * 1000);
+    }, MAX_TIME_OUT * 1000 + 5000);
   };
 
   const resetPassword = () => {
@@ -553,7 +560,7 @@ export default function ForgotPassword() {
             {successfullyFinished && (
               <Grid item xs={12}>
                 <div style={{ width: "100%", textAlign: "center" }}>
-                  <Link href="/login" variant="body2">
+                  <Link href={getGlobalPath("/login")} variant="body2">
                     {"Go to Login page"}
                   </Link>
                 </div>
@@ -562,7 +569,7 @@ export default function ForgotPassword() {
 
           {!successfullyFinished && (
               <Grid item>
-                <Link href="/login" variant="body2">
+                <Link href={getGlobalPath("/login")} variant="body2">
                   {"Back to Sign in page"}
                 </Link>
               </Grid>
