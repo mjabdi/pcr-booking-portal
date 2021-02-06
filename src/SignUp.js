@@ -89,6 +89,31 @@ const useStyles = makeStyles((theme) => ({
     // marginLeft: theme.spacing(1),
     fontWeight: "400",
   },
+
+  passwordSuccess:{
+    width: "100%",
+    textAlign: "left",
+    fontSize: "0.75rem",
+    color: "#13ab0e",
+    marginTop:"-10px"
+  },
+
+  passwordError: {
+    width: "100%",
+    textAlign: "left",
+    fontSize: "0.75rem",
+    color: "red",
+    marginTop:"-10px"
+  },
+
+  passwordDefault: {
+    width: "100%",
+    textAlign: "left",
+    fontSize: "0.75rem",
+    color: "#999",
+    marginTop:"-10px"
+  }
+
 }));
 
 const timeFormat = (num) => {
@@ -146,10 +171,7 @@ export default function SignUp() {
       error = true;
       setFirstNameError(true);
     }
-    if (!lastName || lastName.trim().length < 1) {
-      error = true;
-      setLastNameError(true);
-    }
+
     if (
       !email ||
       email.trim().length < 1 ||
@@ -244,8 +266,7 @@ export default function SignUp() {
       setError(null);
       setSubmiting(true);
       const payload = {
-        forename: firstName,
-        surname: lastName,
+        fullname: firstName,
         email: email,
         password: password,
       };
@@ -424,27 +445,12 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="firstname-id"
-                label="First Name"
+                label="Full Name"
                 name="firstname"
-                autoComplete="given-name"
+                autoComplete="name"
                 value={firstName}
                 onChange={firstNameChanged}
                 autoFocus
-              />
-
-              <TextField
-                disabled={verificationCodeSent}
-                error={lastNameError}
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="lastname-id"
-                label="Last Name"
-                name="firstname"
-                autoComplete="family-name"
-                value={lastName}
-                onChange={lastNameChanged}
               />
 
               <TextField
@@ -479,7 +485,7 @@ export default function SignUp() {
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={passwordChanged}
-                  autoComplete="new-password"
+                  autoComplete = "current-password"
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton
@@ -495,6 +501,9 @@ export default function SignUp() {
                   labelWidth={100}
                 />
               </FormControl>
+              <div className={password?.length >=8 ? classes.passwordSuccess : password?.length === 0 ? classes.passwordDefault : classes.passwordError }>
+                minimum password length : 8 
+              </div>
 
               <FormControl
                 disabled={verificationCodeSent}
@@ -503,7 +512,7 @@ export default function SignUp() {
                 className={clsx(classes.margin, classes.textField)}
                 variant="outlined"
               >
-                <InputLabel htmlFor="outlined-adornment-password">
+                <InputLabel htmlFor="outlined-adornment-repeat-password">
                   {" "}
                   Repeat Password{" "}
                 </InputLabel>
@@ -514,7 +523,7 @@ export default function SignUp() {
                   type={showPassword ? "text" : "password"}
                   value={passwordRepeat}
                   onChange={passwordRepeatChanged}
-                  autoComplete="new-password"
+                  autoComplete = "current-password"
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton

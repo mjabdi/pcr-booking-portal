@@ -88,7 +88,7 @@ export default function DashboardPreview() {
          
           <div className={classes.welcomeLabel}>
              {/* <span>Welcome to </span> Medical Express Clinic <span className={classes.secondaryLabel}>Patients Portal</span>    */}
-             <span style={{color:"#999"}}>Welcome <span className={classes.primaryLabel}> {`${state.userId?.forename}!`} </span> </span>
+             <span style={{color:"#999"}}>Welcome <span className={classes.primaryLabel}> {`${state.userId?.fullname}!`} </span> </span>
           </div>
         
           

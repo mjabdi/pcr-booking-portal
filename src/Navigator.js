@@ -20,6 +20,7 @@ import UserBookingService from './services/UserBookingService';
 import UserService from './services/UserService';
 import { getMenuId } from './MenuList';
 import { getGlobalPath } from './GlobalPath';
+import RapidSignUp from './RapidSignUp';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -70,7 +71,12 @@ export default function Navigator() {
         UserBookingService.setToken(authToken)
         UserService.setToken(authToken)
 
-        if (location.pathname.startsWith(getGlobalPath('/signup')))
+        if (location.pathname.startsWith(getGlobalPath('/rapidsignup')))
+        {
+          setState(state => ({...state, rapidSignUp: true ,  signedIn: false, signedUp: false, forgotPassword: false}));
+          setLoaded(true)
+        }
+        else if (location.pathname.startsWith(getGlobalPath('/signup')))
         {
           setState(state => ({...state, signedIn: false, signedUp: true, forgotPassword: false}));
           setLoaded(true)
@@ -121,7 +127,9 @@ export default function Navigator() {
       }
       else
       {
-        if (state.signedUp)
+        if (state.rapidSignUp)
+          return <RapidSignUp/>
+        else if (state.signedUp)
           return <SignUp/>
         else if (state.forgotPassword)
           return <ForgotPassword/>

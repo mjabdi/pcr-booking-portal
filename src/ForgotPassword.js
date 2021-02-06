@@ -476,7 +476,7 @@ export default function ForgotPassword() {
               type={showPassword ? "text" : "password"}
               value={password}
               onChange={passwordChanged}
-              autoComplete="new-password"
+              autoComplete = "current-password"
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
@@ -500,7 +500,7 @@ export default function ForgotPassword() {
             className={clsx(classes.margin, classes.textField)}
             variant="outlined"
           >
-            <InputLabel htmlFor="outlined-adornment-password">
+            <InputLabel htmlFor="outlined-adornment-repeat-password">
               {" "}
               Repeat New Password{" "}
             </InputLabel>
@@ -511,7 +511,7 @@ export default function ForgotPassword() {
               type={showPassword ? "text" : "password"}
               value={passwordRepeat}
               onChange={passwordRepeatChanged}
-              autoComplete="new-password"
+              autoComplete = "current-password"
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton

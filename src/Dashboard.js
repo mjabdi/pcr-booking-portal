@@ -168,8 +168,8 @@ export default function Dashboard() {
   const handleLogout = () => {
     localStorage.removeItem("app-auth-token");
     sessionStorage.removeItem("app-auth-token");
-    setState((state) => ({ ...state, signedIn: false }));
-    history.replace("./login");
+    setState((state) => ({ signedIn: false }));
+    history.push(getGlobalPath("/login"));
   };
 
   return (
@@ -216,7 +216,7 @@ export default function Dashboard() {
           >
             <Grid item>
               {state.userId &&
-                `${state.userId.forename} ${state.userId.surname}`}
+                `${state.userId.fullname}`}
             </Grid>
             <Grid item>
               <Tooltip title="Logout">

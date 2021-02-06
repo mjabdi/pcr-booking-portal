@@ -6,7 +6,7 @@ export async function getUserIdFromToken(token)
        const res  = await UserService.checkToken({token: token})
        if (res.data.status === 'OK')
         {
-            return {email: res.data.userId, forename: res.data.forename, surname: res.data.surname}
+            return {email: res.data.userId, fullname: res.data.fullname}
         }
        else
         {

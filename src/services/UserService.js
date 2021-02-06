@@ -7,6 +7,16 @@ export default class UserService{
         this.token = token
     }
 
+    static getUserMapping = (payload) =>
+    {
+        return API.post('/api/user/getusermapping', payload)
+    }
+
+    static rapidSignUp = (payload) =>
+    {
+        return API.post('/api/user/rapidsignup', payload)
+    }
+
     static signUp = (payload) =>
     {
         return API.post('/api/user/signup', payload)
