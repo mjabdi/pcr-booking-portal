@@ -19,6 +19,7 @@ import GlobalState from "./GlobalState";
 import UserBookingService from "./services/UserBookingService";
 import PCRBookingCard from "./PCRBookingCard";
 import GynaeBookingCard from "./GynaeBookingCard";
+import GPBookingCard from "./GPBookingCard";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -110,6 +111,11 @@ export default function BookingsPreview() {
         (test) => test.clinic === "gynae"  && (hideCanceled ? !test.deleted : true)
       );
     }
+    else if (testType === "gp") {
+      return tests.filter(
+        (test) => test.clinic === "gp"  && (hideCanceled ? !test.deleted : true)
+      );
+    }
   };
 
   return (
@@ -144,6 +150,11 @@ export default function BookingsPreview() {
                 <MenuItem value={"gynae"}>
                   Gynaecologist
                 </MenuItem>
+
+                <MenuItem value={"gp"}>
+                  Private GP
+                </MenuItem>
+
               </Select>
             </FormControl>
           </Grid>
@@ -193,6 +204,7 @@ export default function BookingsPreview() {
               <Grid key={`grid-item-${index}`} item xs={12} md={4} lg={6}>                
                 {booking.clinic === "pcr" &&  <PCRBookingCard booking={booking} />}
                 {booking.clinic === "gynae" &&  <GynaeBookingCard booking={booking} />}
+                {booking.clinic === "gp" &&  <GPBookingCard booking={booking} />}
 
               </Grid>
             ))}

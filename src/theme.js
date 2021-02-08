@@ -38,11 +38,11 @@ const theme = createMuiTheme({
       black,
       darkBlack
     },
-    warning: {
-      light: warningLight,
-      main: warningMain,
-      dark: warningDark
-    },
+    // warning: {
+    //   light: warningLight,
+    //   main: warningMain,
+    //   dark: warningDark
+    // },
     // Used to shift a color's luminance by approximately
     // two indexes within its tonal palette.
     // E.g., shift from Red 500 to Red 300 or Red 700.

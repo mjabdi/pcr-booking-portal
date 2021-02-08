@@ -17,7 +17,7 @@ import PDFService from "./services/PDFService";
 import PrintIcon from '@material-ui/icons/Print';
 import EditIcon from '@material-ui/icons/Edit';
 
-import PregnantWomanIcon from '@material-ui/icons/PregnantWoman';
+import LocalHospitalIcon from '@material-ui/icons/LocalHospital';
 import Alert from "@material-ui/lab/Alert";
 
 
@@ -128,7 +128,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function GynaeBookingCard({ booking }) {
+export default function GPBookingCard({ booking }) {
   const classes = useStyles();
 
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
@@ -159,6 +159,8 @@ export default function GynaeBookingCard({ booking }) {
 
     return "";
   }
+
+
 
   const getBookingRef = () =>
   {
@@ -221,6 +223,16 @@ export default function GynaeBookingCard({ booking }) {
     )
   }
 
+  const getNotes = () =>
+  {
+    return (
+      <React.Fragment>
+        <span className={classes.itemLabel}> Notes : </span>{" "}
+        <span className={classes.itemData}> {`${booking.notes || '-'}`} </span>
+    </React.Fragment>
+    )
+  }
+
   const getFormNotification = () =>
   {
     return (
@@ -240,24 +252,14 @@ export default function GynaeBookingCard({ booking }) {
     )
   }
 
-  const getNotes = () =>
-  {
-    return (
-      <React.Fragment>
-        <span className={classes.itemLabel}> Notes : </span>{" "}
-        <span className={classes.itemData}> {`${booking.notes || '-'}`} </span>
-    </React.Fragment>
-    )
-  }
-
   const editButtonClicked = () =>
   {
-    const href = `https://londonmedicalclinic.co.uk/medicalexpressclinic/user/edit/gynae/${booking._id}`
+    const href = `https://londonmedicalclinic.co.uk/medicalexpressclinic/user/edit/gp/${booking._id}`
     window.open(href, "_blank")
   }
 
   const openRegForm = () => {
-    const href = `https://londonmedicalclinic.co.uk/medicalexpressclinic/user/form/gynae/${booking._id}`
+    const href = `https://londonmedicalclinic.co.uk/medicalexpressclinic/user/form/gp/${booking._id}`
     window.open(href, "_blank")
   }
 
@@ -287,10 +289,10 @@ export default function GynaeBookingCard({ booking }) {
                     aria-label="pcr-fit-to-fly"
                     className={classes.avatar}
                   >
-                    <PregnantWomanIcon />
+                    <LocalHospitalIcon />
                   </Avatar>
                 </Grid>
-                <Grid item>Gynaecologist</Grid>
+                <Grid item>Private GP</Grid>
               </Grid>
             </div>
 
@@ -323,9 +325,6 @@ export default function GynaeBookingCard({ booking }) {
                 </Grid>
                 <Grid item xs={12} md={6}>
                   {getEmail()}
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  {getService()}
                 </Grid>
                 <Grid item xs={12} md={6}>
                   {getNotes()}

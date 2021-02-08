@@ -34,7 +34,8 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 
 import AccessibilityNewIcon from "@material-ui/icons/AccessibilityNew";
 import AirplanemodeActiveIcon from "@material-ui/icons/AirplanemodeActive";
-import PregnantWomanIcon from '@material-ui/icons/PregnantWoman';
+import PregnantWomanIcon from "@material-ui/icons/PregnantWoman";
+import LocalHospitalIcon from "@material-ui/icons/LocalHospital";
 import { getGlobalPath } from "./GlobalPath";
 
 const useStyles = makeStyles((theme) => ({
@@ -96,10 +97,8 @@ export default function NewBooking() {
   const classes = useStyles();
   const [state, setState] = React.useContext(GlobalState);
 
-  
-
-  const [loading, setLoading] = React.useState(false)
-  const [bookingId, setBookingId] = React.useState(null)
+  const [loading, setLoading] = React.useState(false);
+  const [bookingId, setBookingId] = React.useState(null);
 
   const [expandedCard1, setExpandedCard1] = React.useState(false);
   const expandedCard1Clicked = () => {
@@ -116,58 +115,64 @@ export default function NewBooking() {
     setExpandedCard3(!expandedCard3);
   };
 
+  const [expandedCard4, setExpandedCard4] = React.useState(false);
+  const expandedCard4Clicked = () => {
+    setExpandedCard4(!expandedCard4);
+  };
 
-  useEffect( () => {
-
-    setLoading(true)
-    UserBookingService.getMostRecentBookingId().then(res => {
-        setLoading(false)
-        if (res.data.status === 'OK')
-        {
-            setBookingId(res.data.bookingId)
+  useEffect(() => {
+    setLoading(true);
+    UserBookingService.getMostRecentBookingId()
+      .then((res) => {
+        setLoading(false);
+        if (res.data.status === "OK") {
+          setBookingId(res.data.bookingId);
         }
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.error(err);
+      });
+  }, []);
 
-    }).catch(err =>
-        {
-            setLoading(false)
-            console.error(err)
-        })
-
-  }, [])
-
-
-  const pcrFittoFlyClicked = () =>
-  {
-      let href =  'https://travelpcrtest.com'
-      if (bookingId)
-      {
-          href += `/id${bookingId}`
-      }
-
-      window.open(href,"_blank")
-  }
-
-  const pcrTesttoReleaseClicked = () =>
-  {
-    let href =  'https://testrelease.co.uk'
-    if (bookingId)
-    {
-        href += `/${bookingId}`
+  const pcrFittoFlyClicked = () => {
+    let href = "https://travelpcrtest.com";
+    if (bookingId) {
+      href += `/id${bookingId}`;
     }
 
-    window.open(href,"_blank")
-  }
+    window.open(href, "_blank");
+  };
 
-  const gynaeClicked = () =>
-  {
-    let href =  'https://londonmedicalclinic.co.uk/medicalexpressclinic/book/gynae'
+  const pcrTesttoReleaseClicked = () => {
+    let href = "https://testrelease.co.uk";
+    if (bookingId) {
+      href += `/${bookingId}`;
+    }
+
+    window.open(href, "_blank");
+  };
+
+  const gynaeClicked = () => {
+    let href =
+      "https://londonmedicalclinic.co.uk/medicalexpressclinic/book/gynae";
     // if (bookingId)
     // {
     //     href += `/${bookingId}`
     // }
 
-    window.open(href,"_blank")
-  }
+    window.open(href, "_blank");
+  };
+
+  const gpClicked = () => {
+    let href = "https://londonmedicalclinic.co.uk/medicalexpressclinic/book/gp";
+    // if (bookingId)
+    // {
+    //     href += `/${bookingId}`
+    // }
+
+    window.open(href, "_blank");
+  };
 
   return (
     <React.Fragment>
@@ -191,7 +196,10 @@ export default function NewBooking() {
                 <Card className={classes.root}>
                   <CardHeader
                     avatar={
-                      <Avatar aria-label="pcr-fit-to-fly" className={classes.avatar}>
+                      <Avatar
+                        aria-label="pcr-fit-to-fly"
+                        className={classes.avatar}
+                      >
                         <AirplanemodeActiveIcon />
                       </Avatar>
                     }
@@ -220,7 +228,7 @@ export default function NewBooking() {
                       variant="body2"
                       color="textSecondary"
                       component="p"
-                      style={{ textAlign: "justify",  minHeight:200 }}
+                      style={{ textAlign: "justify", minHeight: 200 }}
                     >
                       In order to protect public health and prevent the spread
                       of COVID-19, many airlines will ask passengers to produce
@@ -286,7 +294,10 @@ export default function NewBooking() {
                 <Card className={classes.root}>
                   <CardHeader
                     avatar={
-                      <Avatar aria-label="pcr-test-to-release" className={classes.avatar}>
+                      <Avatar
+                        aria-label="pcr-test-to-release"
+                        className={classes.avatar}
+                      >
                         <AccessibilityNewIcon />
                       </Avatar>
                     }
@@ -315,7 +326,7 @@ export default function NewBooking() {
                       variant="body2"
                       color="textSecondary"
                       component="p"
-                      style={{ textAlign: "justify" , minHeight:200}}
+                      style={{ textAlign: "justify", minHeight: 200 }}
                     >
                       The UK Coronavirus Task Force has announced that rules for
                       the current 14 day quarantine for people returning to the
@@ -392,7 +403,10 @@ export default function NewBooking() {
                 <Card className={classes.root}>
                   <CardHeader
                     avatar={
-                      <Avatar aria-label="gynae-test" className={classes.avatar}>
+                      <Avatar
+                        aria-label="gynae-test"
+                        className={classes.avatar}
+                      >
                         <PregnantWomanIcon />
                       </Avatar>
                     }
@@ -408,7 +422,21 @@ export default function NewBooking() {
                       </span>
                     }
                     subheader={
-                      <span className={classes.subheader}> £100 <span style={{color:"#999", fontWeight:"400", marginLeft:"10px", fontSize:"0.8rem"}}> pre-payment </span> </span>
+                      <span className={classes.subheader}>
+                        {" "}
+                        £100{" "}
+                        <span
+                          style={{
+                            color: "#999",
+                            fontWeight: "400",
+                            marginLeft: "10px",
+                            fontSize: "0.8rem",
+                          }}
+                        >
+                          {" "}
+                          pre-payment{" "}
+                        </span>{" "}
+                      </span>
                     }
                   />
                   <CardMedia
@@ -421,10 +449,15 @@ export default function NewBooking() {
                       variant="body2"
                       color="textSecondary"
                       component="p"
-                      style={{ textAlign: "justify", minHeight:200 }}
+                      style={{ textAlign: "justify", minHeight: 200 }}
                     >
-                     Years of experience has made us understand that women need expert gynaecology advice and skills, plus specialist care is needed for different cases.
-                     Our highly experienced consultant gynaecologist in London works with a team of specialists, including doctors and GPs in areas like mental health, fertility, cardiology, ultrasound scans, and endocrinology.
+                      Years of experience has made us understand that women need
+                      expert gynaecology advice and skills, plus specialist care
+                      is needed for different cases. Our highly experienced
+                      consultant gynaecologist in London works with a team of
+                      specialists, including doctors and GPs in areas like
+                      mental health, fertility, cardiology, ultrasound scans,
+                      and endocrinology.
                     </Typography>
                   </CardContent>
                   <CardActions disableSpacing>
@@ -451,19 +484,109 @@ export default function NewBooking() {
                     <CardContent>
                       <Typography paragraph>Method:</Typography>
                       <Typography paragraph style={{ textAlign: "justify" }}>
-                      An essential aspect of general women's healthcare is gynaecology. We are an established private gynaecology clinic, situated at, 117A Harley Street, Marylebone, London providing everyday services to women. Headed by a team of consultants, we operate with a wealth of knowledge and expertise.
+                        An essential aspect of general women's healthcare is
+                        gynaecology. We are an established private gynaecology
+                        clinic, situated at, 117A Harley Street, Marylebone,
+                        London providing everyday services to women. Headed by a
+                        team of consultants, we operate with a wealth of
+                        knowledge and expertise.
                       </Typography>
                       <Typography paragraph style={{ textAlign: "justify" }}>
-                      Our experience private gynaecologists treat female health issues ranging from pelvic pain, early pregnancy, vulval disorders, endometriosis, painful sex, contraception, fertility, to general gynaecological condition. Teenagers having relevant concerns can also get help at our practice.
+                        Our experience private gynaecologists treat female
+                        health issues ranging from pelvic pain, early pregnancy,
+                        vulval disorders, endometriosis, painful sex,
+                        contraception, fertility, to general gynaecological
+                        condition. Teenagers having relevant concerns can also
+                        get help at our practice.
                       </Typography>
                       <Typography paragraph style={{ textAlign: "justify" }}>
-                      Should an in-patient stay or surgical procedure be necessary, we've got admitting rights at top private London hospitals near you where this can be done. We pride in our ability to provide expert care and advice and be available to patients when there is any need.
+                        Should an in-patient stay or surgical procedure be
+                        necessary, we've got admitting rights at top private
+                        London hospitals near you where this can be done. We
+                        pride in our ability to provide expert care and advice
+                        and be available to patients when there is any need.
                       </Typography>
                     </CardContent>
                   </Collapse>
                 </Card>
               </Grid>
 
+              <Grid item>
+                <Card className={classes.root}>
+                  <CardHeader
+                    avatar={
+                      <Avatar aria-label="gp-test" className={classes.avatar}>
+                        <LocalHospitalIcon />
+                      </Avatar>
+                    }
+                    // action={
+                    //   <IconButton aria-label="settings">
+                    //     <MoreVertIcon />
+                    //   </IconButton>
+                    // }
+                    title={
+                      <span className={classes.title}> Private GP London </span>
+                    }
+                    subheader={
+                      <span className={classes.subheader}> £150 </span>
+                    }
+                  />
+                  <CardMedia
+                    className={classes.mediaGynae}
+                    image={getGlobalPath("/images/private-gp-london.jpg")}
+                    title="Paella dish"
+                  />
+                  <CardContent>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                      style={{ textAlign: "justify", minHeight: 200 }}
+                    >
+                      Our professional and experienced private GP in London
+                      providing excellent and affordable GP services like all
+                      common health issues and other risk factors in its initial
+                      stage. After this, a consultation will be conducted by the
+                      GP (General Practitioner) to go through your past and
+                      present condition for proper assessment of your health{" "}
+                    </Typography>
+                  </CardContent>
+                  <CardActions disableSpacing>
+                    <Button
+                      color="secondary"
+                      variant="contained"
+                      style={{ color: "#fff" }}
+                      onClick={gpClicked}
+                    >
+                      Book Now
+                    </Button>
+                    <IconButton
+                      className={clsx(classes.expand, {
+                        [classes.expandOpen]: expandedCard4,
+                      })}
+                      onClick={expandedCard4Clicked}
+                      aria-expanded={expandedCard4}
+                      aria-label="show more"
+                    >
+                      <ExpandMoreIcon />
+                    </IconButton>
+                  </CardActions>
+                  <Collapse in={expandedCard4} timeout="auto" unmountOnExit>
+                    <CardContent>
+                      <Typography paragraph>Method:</Typography>
+                      <Typography paragraph style={{ textAlign: "justify" }}>
+                      At Medical Express Clinic, we offer flexible appointment for private GP services whenever you need. With extended hours and weekend opening, we are helping our patients to get proper access for high-quality health care at a time convenient to them. We are centrally located in Harley Street and you can simply walk into our practice according to your convenience, though we recommend giving us a call beforehand to check our waiting time.
+                      </Typography>
+                      <Typography paragraph style={{ textAlign: "justify" }}>
+                      We are open seven days a week with evening and home visits available by special request during weekdays. You can come to see our clinic for a wide range of scans and diagnostic tests. Our goal is to cure you as soon as possible.
+                      </Typography>
+                      <Typography paragraph style={{ textAlign: "justify" }}>
+                      At Medical Express Clinic, our experienced private doctors in London, who have a passion for helping their patient, whatever their healthcare needs.
+                      </Typography>
+                    </CardContent>
+                  </Collapse>
+                </Card>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
