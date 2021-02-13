@@ -20,6 +20,7 @@ import UserBookingService from "./services/UserBookingService";
 import PCRBookingCard from "./PCRBookingCard";
 import GynaeBookingCard from "./GynaeBookingCard";
 import GPBookingCard from "./GPBookingCard";
+import STDBookingCard from "./STDBookingCard";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -116,6 +117,11 @@ export default function BookingsPreview() {
         (test) => test.clinic === "gp"  && (hideCanceled ? !test.deleted : true)
       );
     }
+    else if (testType === "std") {
+      return tests.filter(
+        (test) => test.clinic === "std"  && (hideCanceled ? !test.deleted : true)
+      );
+    }
   };
 
   return (
@@ -153,6 +159,10 @@ export default function BookingsPreview() {
 
                 <MenuItem value={"gp"}>
                   Private GP
+                </MenuItem>
+
+                <MenuItem value={"std"}>
+                  STD Check
                 </MenuItem>
 
               </Select>
@@ -205,7 +215,7 @@ export default function BookingsPreview() {
                 {booking.clinic === "pcr" &&  <PCRBookingCard booking={booking} />}
                 {booking.clinic === "gynae" &&  <GynaeBookingCard booking={booking} />}
                 {booking.clinic === "gp" &&  <GPBookingCard booking={booking} />}
-
+                {booking.clinic === "std" &&  <STDBookingCard booking={booking} />}
               </Grid>
             ))}
         </Grid>

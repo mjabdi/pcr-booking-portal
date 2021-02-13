@@ -174,6 +174,16 @@ export default function NewBooking() {
     window.open(href, "_blank");
   };
 
+  const stdClicked = () => {
+    let href = "https://londonmedicalclinic.co.uk/medicalexpressclinic/book/std";
+    // if (bookingId)
+    // {
+    //     href += `/${bookingId}`
+    // }
+
+    window.open(href, "_blank");
+  };
+
   return (
     <React.Fragment>
       <div style={{ minHeight: "80vh", paddingTop: "30px" }}>
@@ -188,7 +198,7 @@ export default function NewBooking() {
             <Grid
               container
               direction="row"
-              justify="center"
+              justify="flex-start"
               alignItems="flex-start"
               spacing={2}
             >
@@ -247,7 +257,7 @@ export default function NewBooking() {
                     >
                       Book Now
                     </Button>
-                    <IconButton
+                    {/* <IconButton
                       className={clsx(classes.expand, {
                         [classes.expandOpen]: expandedCard1,
                       })}
@@ -256,7 +266,7 @@ export default function NewBooking() {
                       aria-label="show more"
                     >
                       <ExpandMoreIcon />
-                    </IconButton>
+                    </IconButton> */}
                   </CardActions>
                   <Collapse in={expandedCard1} timeout="auto" unmountOnExit>
                     <CardContent>
@@ -348,7 +358,7 @@ export default function NewBooking() {
                     >
                       Book Now
                     </Button>
-                    <IconButton
+                    {/* <IconButton
                       className={clsx(classes.expand, {
                         [classes.expandOpen]: expandedCard2,
                       })}
@@ -357,7 +367,7 @@ export default function NewBooking() {
                       aria-label="show more"
                     >
                       <ExpandMoreIcon />
-                    </IconButton>
+                    </IconButton> */}
                   </CardActions>
                   <Collapse in={expandedCard2} timeout="auto" unmountOnExit>
                     <CardContent>
@@ -469,7 +479,7 @@ export default function NewBooking() {
                     >
                       Book Now
                     </Button>
-                    <IconButton
+                    {/* <IconButton
                       className={clsx(classes.expand, {
                         [classes.expandOpen]: expandedCard3,
                       })}
@@ -478,7 +488,7 @@ export default function NewBooking() {
                       aria-label="show more"
                     >
                       <ExpandMoreIcon />
-                    </IconButton>
+                    </IconButton> */}
                   </CardActions>
                   <Collapse in={expandedCard3} timeout="auto" unmountOnExit>
                     <CardContent>
@@ -560,7 +570,7 @@ export default function NewBooking() {
                     >
                       Book Now
                     </Button>
-                    <IconButton
+                    {/* <IconButton
                       className={clsx(classes.expand, {
                         [classes.expandOpen]: expandedCard4,
                       })}
@@ -569,19 +579,126 @@ export default function NewBooking() {
                       aria-label="show more"
                     >
                       <ExpandMoreIcon />
-                    </IconButton>
+                    </IconButton> */}
                   </CardActions>
                   <Collapse in={expandedCard4} timeout="auto" unmountOnExit>
                     <CardContent>
                       <Typography paragraph>Method:</Typography>
                       <Typography paragraph style={{ textAlign: "justify" }}>
-                      At Medical Express Clinic, we offer flexible appointment for private GP services whenever you need. With extended hours and weekend opening, we are helping our patients to get proper access for high-quality health care at a time convenient to them. We are centrally located in Harley Street and you can simply walk into our practice according to your convenience, though we recommend giving us a call beforehand to check our waiting time.
+                        At Medical Express Clinic, we offer flexible appointment
+                        for private GP services whenever you need. With extended
+                        hours and weekend opening, we are helping our patients
+                        to get proper access for high-quality health care at a
+                        time convenient to them. We are centrally located in
+                        Harley Street and you can simply walk into our practice
+                        according to your convenience, though we recommend
+                        giving us a call beforehand to check our waiting time.
                       </Typography>
                       <Typography paragraph style={{ textAlign: "justify" }}>
-                      We are open seven days a week with evening and home visits available by special request during weekdays. You can come to see our clinic for a wide range of scans and diagnostic tests. Our goal is to cure you as soon as possible.
+                        We are open seven days a week with evening and home
+                        visits available by special request during weekdays. You
+                        can come to see our clinic for a wide range of scans and
+                        diagnostic tests. Our goal is to cure you as soon as
+                        possible.
                       </Typography>
                       <Typography paragraph style={{ textAlign: "justify" }}>
-                      At Medical Express Clinic, our experienced private doctors in London, who have a passion for helping their patient, whatever their healthcare needs.
+                        At Medical Express Clinic, our experienced private
+                        doctors in London, who have a passion for helping their
+                        patient, whatever their healthcare needs.
+                      </Typography>
+                    </CardContent>
+                  </Collapse>
+                </Card>
+              </Grid>
+
+              <Grid item>
+                <Card className={classes.root}>
+                  <CardHeader
+                    avatar={
+                      <Avatar aria-label="gp-test" className={classes.avatar}>
+                        <LocalHospitalIcon />
+                      </Avatar>
+                    }
+                    // action={
+                    //   <IconButton aria-label="settings">
+                    //     <MoreVertIcon />
+                    //   </IconButton>
+                    // }
+                    title={
+                      <span className={classes.title}>
+                        {" "}
+                        Private STD Check London{" "}
+                      </span>
+                    }
+                    subheader={<span className={classes.subheader}> </span>}
+                  />
+                  <CardMedia
+                    className={classes.mediaGynae}
+                    image={getGlobalPath("/images/std-banner.jpg")}
+                    title="Paella dish"
+                  />
+                  <CardContent>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                      style={{ textAlign: "justify", minHeight: 200 }}
+                    >
+                      We are a leading private sexual health (GUM) clinic
+                      located in the heart of London. At STD Check Clinic in
+                      London, we offer private STI testing and STD Screening in
+                      a comfortable and safe environment where you can start an
+                      open discussion with our doctors about your sexual health
+                      concerns. Our clinic is staffed by doctors, nurses and
+                      health care assistants who look after the sexual and
+                      reproductive health of our patients with utmost care,
+                      diligence and privacy.
+                    </Typography>
+                  </CardContent>
+                  <CardActions disableSpacing>
+                    <Button
+                      color="secondary"
+                      variant="contained"
+                      style={{ color: "#fff" }}
+                      onClick={stdClicked}
+                    >
+                      Book Now
+                    </Button>
+                    {/* <IconButton
+                      className={clsx(classes.expand, {
+                        [classes.expandOpen]: expandedCard4,
+                      })}
+                      onClick={expandedCard4Clicked}
+                      aria-expanded={expandedCard4}
+                      aria-label="show more"
+                    >
+                      <ExpandMoreIcon />
+                    </IconButton> */}
+                  </CardActions>
+                  <Collapse in={expandedCard4} timeout="auto" unmountOnExit>
+                    <CardContent>
+                      <Typography paragraph>Method:</Typography>
+                      <Typography paragraph style={{ textAlign: "justify" }}>
+                        At Medical Express Clinic, we offer flexible appointment
+                        for private GP services whenever you need. With extended
+                        hours and weekend opening, we are helping our patients
+                        to get proper access for high-quality health care at a
+                        time convenient to them. We are centrally located in
+                        Harley Street and you can simply walk into our practice
+                        according to your convenience, though we recommend
+                        giving us a call beforehand to check our waiting time.
+                      </Typography>
+                      <Typography paragraph style={{ textAlign: "justify" }}>
+                        We are open seven days a week with evening and home
+                        visits available by special request during weekdays. You
+                        can come to see our clinic for a wide range of scans and
+                        diagnostic tests. Our goal is to cure you as soon as
+                        possible.
+                      </Typography>
+                      <Typography paragraph style={{ textAlign: "justify" }}>
+                        At Medical Express Clinic, our experienced private
+                        doctors in London, who have a passion for helping their
+                        patient, whatever their healthcare needs.
                       </Typography>
                     </CardContent>
                   </Collapse>
