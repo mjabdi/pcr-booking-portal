@@ -21,6 +21,7 @@ import PCRBookingCard from "./PCRBookingCard";
 import GynaeBookingCard from "./GynaeBookingCard";
 import GPBookingCard from "./GPBookingCard";
 import STDBookingCard from "./STDBookingCard";
+import BloodBookingCard from "./BloodBookingCard";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -122,6 +123,12 @@ export default function BookingsPreview() {
         (test) => test.clinic === "std"  && (hideCanceled ? !test.deleted : true)
       );
     }
+    else if (testType === "blood") {
+      return tests.filter(
+        (test) => test.clinic === "blood"  && (hideCanceled ? !test.deleted : true)
+      );
+    }
+
   };
 
   return (
@@ -164,6 +171,11 @@ export default function BookingsPreview() {
                 <MenuItem value={"std"}>
                   STD Check
                 </MenuItem>
+
+                <MenuItem value={"blood"}>
+                  Blood Test
+                </MenuItem>
+
 
               </Select>
             </FormControl>
@@ -216,6 +228,8 @@ export default function BookingsPreview() {
                 {booking.clinic === "gynae" &&  <GynaeBookingCard booking={booking} />}
                 {booking.clinic === "gp" &&  <GPBookingCard booking={booking} />}
                 {booking.clinic === "std" &&  <STDBookingCard booking={booking} />}
+                {booking.clinic === "blood" &&  <BloodBookingCard booking={booking} />}
+
               </Grid>
             ))}
         </Grid>

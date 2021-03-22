@@ -128,7 +128,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function STDBookingCard({ booking }) {
+export default function BloodBookingCard({ booking }) {
   const classes = useStyles();
 
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
@@ -218,7 +218,28 @@ export default function STDBookingCard({ booking }) {
     return (
       <React.Fragment>
         <span className={classes.itemLabel}> Package : </span>{" "}
-        <span className={classes.itemData}> {`${booking.packageName}`} </span>
+        <span className={classes.itemData}> {`${booking.packageName || '-'}`} </span>
+    </React.Fragment>
+    )
+  }
+
+  const getIndivisualTests = () =>
+  {
+    let tests = booking.indivisualTests
+    let testsString = ''
+    if (tests)
+    {
+      tests = JSON.parse(tests)
+      tests.forEach(item => {
+          testsString += item.description
+          testsString += ' , '
+      } )
+    }
+
+    return (
+      <React.Fragment>
+        <span className={classes.itemLabel}> Indivisual Tests : </span>{" "}
+        <span className={classes.itemData}> {`${testsString || '-'}`} </span>
     </React.Fragment>
     )
   }
@@ -254,12 +275,12 @@ export default function STDBookingCard({ booking }) {
 
   const editButtonClicked = () =>
   {
-    const href = `https://londonmedicalclinic.co.uk/medicalexpressclinic/user/edit/std/${booking._id}`
+    const href = `https://londonmedicalclinic.co.uk/medicalexpressclinic/user/edit/blood/${booking._id}`
     window.open(href, "_blank")
   }
 
   const openRegForm = () => {
-    const href = `https://londonmedicalclinic.co.uk/medicalexpressclinic/user/form/std/${booking._id}`
+    const href = `https://londonmedicalclinic.co.uk/medicalexpressclinic/user/form/blood/${booking._id}`
     window.open(href, "_blank")
   }
 
@@ -292,7 +313,7 @@ export default function STDBookingCard({ booking }) {
                     <LocalHospitalIcon />
                   </Avatar>
                 </Grid>
-                <Grid item>STD Check</Grid>
+                <Grid item>Blood Test</Grid>
               </Grid>
             </div>
 
@@ -329,6 +350,10 @@ export default function STDBookingCard({ booking }) {
                 <Grid item xs={12} md={6}>
                   {getPackage()}
                 </Grid>
+                <Grid item xs={12} md={6}>
+                  {getIndivisualTests()}
+                </Grid>
+
                 <Grid item xs={12} md={6}>
                   {getNotes()}
                 </Grid>

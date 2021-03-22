@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   root: {
-    maxWidth: 345,
+    maxWidth: 450,
   },
 
   media: {
@@ -184,6 +184,17 @@ export default function NewBooking() {
     window.open(href, "_blank");
   };
 
+
+  const bloodClicked = () => {
+    let href = "https://londonmedicalclinic.co.uk/medicalexpressclinic/book/blood";
+    // if (bookingId)
+    // {
+    //     href += `/${bookingId}`
+    // }
+
+    window.open(href, "_blank");
+  };
+
   return (
     <React.Fragment>
       <div style={{ minHeight: "80vh", paddingTop: "30px" }}>
@@ -198,9 +209,9 @@ export default function NewBooking() {
             <Grid
               container
               direction="row"
-              justify="flex-start"
+              justify="space-around"
               alignItems="flex-start"
-              spacing={2}
+              spacing={10}
             >
               <Grid item>
                 <Card className={classes.root}>
@@ -704,6 +715,92 @@ export default function NewBooking() {
                   </Collapse>
                 </Card>
               </Grid>
+
+              <Grid item>
+                <Card className={classes.root}>
+                  <CardHeader
+                    avatar={
+                      <Avatar aria-label="gp-test" className={classes.avatar}>
+                        <LocalHospitalIcon />
+                      </Avatar>
+                    }
+                    // action={
+                    //   <IconButton aria-label="settings">
+                    //     <MoreVertIcon />
+                    //   </IconButton>
+                    // }
+                    title={
+                      <span className={classes.title}>
+                        {" "}
+                        Private Blood Test London{" "}
+                      </span>
+                    }
+                    subheader={<span className={classes.subheader}> </span>}
+                  />
+                  <CardMedia
+                    className={classes.mediaGynae}
+                    image={getGlobalPath("/images/blood-test.png")}
+                    title="Paella dish"
+                  />
+                  <CardContent>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                      style={{ textAlign: "justify", minHeight: 200 }}
+                    >
+                      Private Blood Tests London has a great reputation for delivering outstanding value for an extensive range of private blood tests in London’s Harley street. We use some of the best labs in London, and with over 1000 blood tests we can cover almost any eventuality and many of our tests’ results return within 24 hours                    </Typography>
+                  </CardContent>
+                  <CardActions disableSpacing>
+                    <Button
+                      color="secondary"
+                      variant="contained"
+                      style={{ color: "#fff" }}
+                      onClick={bloodClicked}
+                    >
+                      Book Now
+                    </Button>
+                    {/* <IconButton
+                      className={clsx(classes.expand, {
+                        [classes.expandOpen]: expandedCard4,
+                      })}
+                      onClick={expandedCard4Clicked}
+                      aria-expanded={expandedCard4}
+                      aria-label="show more"
+                    >
+                      <ExpandMoreIcon />
+                    </IconButton> */}
+                  </CardActions>
+                  <Collapse in={expandedCard4} timeout="auto" unmountOnExit>
+                    <CardContent>
+                      <Typography paragraph>Method:</Typography>
+                      <Typography paragraph style={{ textAlign: "justify" }}>
+                        At Medical Express Clinic, we offer flexible appointment
+                        for private GP services whenever you need. With extended
+                        hours and weekend opening, we are helping our patients
+                        to get proper access for high-quality health care at a
+                        time convenient to them. We are centrally located in
+                        Harley Street and you can simply walk into our practice
+                        according to your convenience, though we recommend
+                        giving us a call beforehand to check our waiting time.
+                      </Typography>
+                      <Typography paragraph style={{ textAlign: "justify" }}>
+                        We are open seven days a week with evening and home
+                        visits available by special request during weekdays. You
+                        can come to see our clinic for a wide range of scans and
+                        diagnostic tests. Our goal is to cure you as soon as
+                        possible.
+                      </Typography>
+                      <Typography paragraph style={{ textAlign: "justify" }}>
+                        At Medical Express Clinic, our experienced private
+                        doctors in London, who have a passion for helping their
+                        patient, whatever their healthcare needs.
+                      </Typography>
+                    </CardContent>
+                  </Collapse>
+                </Card>
+              </Grid>
+
             </Grid>
           </Grid>
         </Grid>
