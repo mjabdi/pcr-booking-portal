@@ -195,6 +195,17 @@ export default function NewBooking() {
     window.open(href, "_blank");
   };
 
+  const dermaClicked = () => {
+    let href = "https://londonmedicalclinic.co.uk/medicalexpressclinic/book/derma";
+    // if (bookingId)
+    // {
+    //     href += `/${bookingId}`
+    // }
+
+    window.open(href, "_blank");
+  };
+
+
   return (
     <React.Fragment>
       <div style={{ minHeight: "80vh", paddingTop: "30px" }}>
@@ -720,7 +731,7 @@ export default function NewBooking() {
                 <Card className={classes.root}>
                   <CardHeader
                     avatar={
-                      <Avatar aria-label="gp-test" className={classes.avatar}>
+                      <Avatar aria-label="blood-test" className={classes.avatar}>
                         <LocalHospitalIcon />
                       </Avatar>
                     }
@@ -800,6 +811,93 @@ export default function NewBooking() {
                   </Collapse>
                 </Card>
               </Grid>
+
+              <Grid item>
+                <Card className={classes.root}>
+                  <CardHeader
+                    avatar={
+                      <Avatar aria-label="derma-test" className={classes.avatar}>
+                        <LocalHospitalIcon />
+                      </Avatar>
+                    }
+                    // action={
+                    //   <IconButton aria-label="settings">
+                    //     <MoreVertIcon />
+                    //   </IconButton>
+                    // }
+                    title={
+                      <span className={classes.title}>
+                        {" "}
+                        Private Dermatologist in London{" "}
+                      </span>
+                    }
+                    subheader={<span className={classes.subheader}> </span>}
+                  />
+                  <CardMedia
+                    className={classes.mediaGynae}
+                    image={getGlobalPath("/images/we-can-help-you.jpeg")}
+                    title="Paella dish"
+                  />
+                  <CardContent>
+                    <Typography
+                      variant="body2"
+                      color="textSecondary"
+                      component="p"
+                      style={{ textAlign: "justify", minHeight: 200 }}
+                    >
+                      Clear Skin Clinic is a renowned private dermatology clinic, conveniently located at Suite G, 117A Harley Street, Marylebone, London W1G 6AT, UK. We have a team of highly experienced private dermatologist who will help to diagnose as well as treat a variety of dermatological conditions like acne, dry skin, cellulitis, genital herpes, birthmarks, rosacea, hyperhidrosis, hair loss, nail fungus, scleroderma, mole removal and other skin problems.                    </Typography>
+                  </CardContent>
+                  <CardActions disableSpacing>
+                    <Button
+                      color="secondary"
+                      variant="contained"
+                      style={{ color: "#fff" }}
+                      onClick={dermaClicked}
+                    >
+                      Book Now
+                    </Button>
+                    {/* <IconButton
+                      className={clsx(classes.expand, {
+                        [classes.expandOpen]: expandedCard4,
+                      })}
+                      onClick={expandedCard4Clicked}
+                      aria-expanded={expandedCard4}
+                      aria-label="show more"
+                    >
+                      <ExpandMoreIcon />
+                    </IconButton> */}
+                  </CardActions>
+                  <Collapse in={expandedCard4} timeout="auto" unmountOnExit>
+                    <CardContent>
+                      <Typography paragraph>Method:</Typography>
+                      <Typography paragraph style={{ textAlign: "justify" }}>
+                        At Medical Express Clinic, we offer flexible appointment
+                        for private GP services whenever you need. With extended
+                        hours and weekend opening, we are helping our patients
+                        to get proper access for high-quality health care at a
+                        time convenient to them. We are centrally located in
+                        Harley Street and you can simply walk into our practice
+                        according to your convenience, though we recommend
+                        giving us a call beforehand to check our waiting time.
+                      </Typography>
+                      <Typography paragraph style={{ textAlign: "justify" }}>
+                        We are open seven days a week with evening and home
+                        visits available by special request during weekdays. You
+                        can come to see our clinic for a wide range of scans and
+                        diagnostic tests. Our goal is to cure you as soon as
+                        possible.
+                      </Typography>
+                      <Typography paragraph style={{ textAlign: "justify" }}>
+                        At Medical Express Clinic, our experienced private
+                        doctors in London, who have a passion for helping their
+                        patient, whatever their healthcare needs.
+                      </Typography>
+                    </CardContent>
+                  </Collapse>
+                </Card>
+              </Grid>
+
+              {/* <Grid item> <div className={classes.root}></div> </Grid>       */}
 
             </Grid>
           </Grid>
